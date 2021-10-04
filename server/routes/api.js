@@ -5,6 +5,7 @@ const { validateBoard } = require("../validators/validators");
 
 
 router.get('/boards', boardsController.getBoards );
+router.get('/board/:id', boardsController.getOneBoard );
 
 router.post('/boards', validateBoard, boardsController.createBoard );
 
