@@ -6,18 +6,8 @@ const BoardSchema = new Schema({
     type: String,
     required: [true, 'The Board title is required']
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    required: true,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-    required: true,
-  },
-  lists: [{ type: mongoose.Schema.Types.ObjectId, ref: "List" }],
-});
+  lists: [{ type: mongoose.Schema.Types.ObjectId, ref: "List" }], // ref: what model to use
+}, {timestamps: true});
 
 const Board = mongoose.model('Board', BoardSchema);
 

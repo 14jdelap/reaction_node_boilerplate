@@ -7,24 +7,16 @@ const ListSchema = new Schema({
     required: [true, "The list title is required"],
   },
   boardId: {
-    type: ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Board",
     required: [true, "The board id is required"],
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
   },
   position: {
     type: Number,
     required: [true, "A list position is required"],
   },
-  cards: [{ type: mongoose.Schema.Types.ObjectId, ref: "Card", }]
-});
+  cards: [{ type: mongoose.Schema.Types.ObjectId, ref: "Card", }] // ref = model
+}, { timestamps: true });
 
 const List = mongoose.model('List', ListSchema);
 

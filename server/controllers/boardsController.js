@@ -1,4 +1,6 @@
 const Board = require("../models/board");
+const List = require("../models/list");
+const Card = require("../models/card");
 const HttpError = require("../models/httpError");
 const { validationResult } = require("express-validator");
 
@@ -15,8 +17,8 @@ const getBoard = (req, res, next) => {
   // https://mongoosejs.com/docs/4.x/docs/populate.html
 
   const boardId = req.params.id;
-
-  Board.findById(boardId).populate("List").then((board) => {
+  // {path: "lists", populate: {path: "cards"}}
+  Board.findById(boardId).populate({path: "lists", populate: {path: "cards"}}).then((board) => {
     res.json(board);
   }).catch((error) => {
     console.log(error)

@@ -15,7 +15,11 @@ const CardSchema = new Schema({
     type: String,
     default: null,
   },
-  listId: [{ type: mongoose.Schema.Types.ObjectId, ref: "List" }],
+  listId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "List",
+    required: [true, "The list id is required"],
+  },
   position: {
     type: Number,
     required: [true, "A card position is required"],
@@ -25,7 +29,7 @@ const CardSchema = new Schema({
     default: 0,
     required: [true, "Comments count required"],
   },
-});
+}, { timestamps: true });
 
 const Card = mongoose.model('Card', CardSchema);
 
