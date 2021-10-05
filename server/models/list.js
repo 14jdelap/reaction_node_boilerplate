@@ -23,11 +23,7 @@ const ListSchema = new Schema({
     type: Number,
     required: [true, "A list position is required"],
   },
-  cards: {
-    type: Array,
-    default: [],
-    required: [true, "The list's card array is required"],
-  }
+  cards: [{ type: mongoose.Schema.Types.ObjectId, ref: "Card", }]
 });
 
 const List = mongoose.model('List', ListSchema);

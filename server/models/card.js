@@ -10,20 +10,12 @@ const CardSchema = new Schema({
     type: Date,
     default: null,
   },
-  labels: {
-    type: Array,
-    default: [],
-    required: [true, "The card needs a labels array"],
-  },
+  labels: [{ type: String, }],
   description: {
     type: String,
     default: null,
   },
-  listId: {
-    type: ObjectId,
-    ref: "List",
-    required: [true, "The list id is required"],
-  },
+  listId: [{ type: mongoose.Schema.Types.ObjectId, ref: "List" }],
   position: {
     type: Number,
     required: [true, "A card position is required"],

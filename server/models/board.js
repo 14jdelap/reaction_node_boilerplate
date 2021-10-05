@@ -16,11 +16,7 @@ const BoardSchema = new Schema({
     default: Date.now,
     required: true,
   },
-  lists: {
-    type: Array,
-    default: [],
-    required: true,
-  },
+  lists: [{ type: mongoose.Schema.Types.ObjectId, ref: "List" }],
 });
 
 const Board = mongoose.model('Board', BoardSchema);

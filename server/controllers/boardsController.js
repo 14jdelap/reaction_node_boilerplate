@@ -10,14 +10,18 @@ const getBoards = (req, res, next) => {
   });
 };
 
-const getOneBoard = (req, res, next) => {
+const getBoard = (req, res, next) => {
+  // PENDING: confirm that this populates the board with lists
+  // https://mongoosejs.com/docs/4.x/docs/populate.html
+
   const boardId = req.params.id;
 
-  Board.findById(boardId).then((board) => {
+  Board.findById(boardId).populate("List").then((board) => {
     res.json(board);
   }).catch((error) => {
     console.log(error)
-    res.send("There was an error")});
+    next(new HttpError("The board doesn't exist, please try looking for a valid board", 404))
+  });
 };
 
 const createBoard = (req, res, next) => {
@@ -38,5 +42,5 @@ const createBoard = (req, res, next) => {
 };
 
 exports.getBoards = getBoards;
-exports.getOneBoard = getOneBoard;
+exports.getBoard = getBoard;
 exports.createBoard = createBoard;
