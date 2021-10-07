@@ -13,6 +13,7 @@ const ListSchema = new Schema({
   },
   position: {
     type: Number,
+    default: 65000
     /*required: [true, "A list position is required"],*/
   },
   cards: [{ type: mongoose.Schema.Types.ObjectId, ref: "Card", }] // ref = model

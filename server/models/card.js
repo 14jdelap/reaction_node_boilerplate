@@ -22,7 +22,7 @@ const CardSchema = new Schema({
   },
   position: {
     type: Number,
-    required: [true, "A card position is required"],
+    default: 65000,
   },
   commentsCount: {
     type: Number,
