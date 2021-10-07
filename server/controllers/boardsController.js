@@ -43,6 +43,11 @@ const createBoard = (req, res, next) => {
   }
 };
 
+const addListToBoard = (boardId, listId) => {
+  Board.updateOne({ _id: boardId}, { $addToSet: { lists: listId } }).then(data => console.log(data));
+}
+
 exports.getBoards = getBoards;
 exports.getBoard = getBoard;
 exports.createBoard = createBoard;
+exports.addListToBoard = addListToBoard;

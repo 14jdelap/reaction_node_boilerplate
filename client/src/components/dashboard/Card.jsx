@@ -17,6 +17,9 @@ const Card = ({ card }) => {
         { card.dueDate === null ? "" : <i className="clock-icon sm-icon overdue-recent completed">
           {card.dueDate}
         </i>}
+
+        {/*Pending: only adding icons when appropriate*/}
+
         <i className="description-icon sm-icon"></i>
         <i className="comment-icon sm-icon"></i>
       </div>
