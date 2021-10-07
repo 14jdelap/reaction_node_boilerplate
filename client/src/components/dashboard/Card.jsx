@@ -2,13 +2,17 @@ import React from "react"
 import Label from "./Label"
 
 const Card = ({ card }) => {
-  delete card["labels"]
+
+  function generateRandomInteger() {
+    // To do: is this correct?
+    return Math.random()*10000000000000000;
+  }
+
   return <div className="card-background">
     <div className="card ">
       <i className="edit-toggle edit-icon sm-icon"></i>
-      
       <div className="card-info">
-        {card.labels.map(label => <Label key={label} color={label} />)}
+        {card.labels.map(label => <Label key={generateRandomInteger()} color={label} />)}
         <p>
           {card.title}
         </p>
