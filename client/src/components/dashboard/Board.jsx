@@ -19,7 +19,7 @@ const Board = (props) => {
 
   return <>
     <BoardHeader board={board} />
-    <ExistingLists />
+    <ExistingLists boardId={boardId}/>
   </>
 }
 

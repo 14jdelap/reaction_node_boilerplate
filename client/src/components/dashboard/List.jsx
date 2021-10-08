@@ -1,13 +1,30 @@
 import React from "react"
+import { useState } from "react"
+import { useDispatch } from "react-redux"
 import ExistingCards from "./ExistingCards"
+import { updateListTitle } from "../../actions/ListActions"
 
 const List = ({ list }) => {
+  const dispatch = useDispatch()
+
+  const [listTitle, setListTitle] = useState(list.title)
+
+  const handleChangeUpdate = (e) => {
+    setListTitle(e.target.value)
+  }
+
+  const handleUpdateListTitle = () => {
+    if (listTitle != list.title) {
+      dispatch(updateListTitle(list._id, listTitle))
+    }
+  }
+
   return <div className="list-wrapper">
     <div className="list-background">
       <div className="list">
         <a className="more-icon sm-icon" href=""></a>
         <div>
-          <p className="list-title">{list.title}</p>
+          <input className="list-title" value={listTitle} onChange={handleChangeUpdate} onBlur={handleUpdateListTitle}></input>
         </div>
         <div className="add-dropdown add-top">
           <div className="card"></div>

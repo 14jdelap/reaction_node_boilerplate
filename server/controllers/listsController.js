@@ -5,6 +5,7 @@ const List = require("../models/list");
 const boardControllers = require("./boardsController");
 
 const createList = (req, res, next) => {
+  console.log(req)
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
