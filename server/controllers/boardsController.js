@@ -17,7 +17,6 @@ const getBoard = (req, res, next) => {
   // https://mongoosejs.com/docs/4.x/docs/populate.html
 
   const boardId = req.params.id;
-  // {path: "lists", populate: {path: "cards"}}
   Board.findById(boardId).populate({path: "lists", populate: {path: "cards"}}).then((board) => {
     res.json(board);
   }).catch((error) => {
@@ -44,7 +43,8 @@ const createBoard = (req, res, next) => {
 };
 
 const addListToBoard = (boardId, listId) => {
-  Board.updateOne({ _id: boardId}, { $addToSet: { lists: listId } }).then(data => console.log(data));
+  Board.updateOne({ _id: boardId}, { $addToSet: { lists: listId } })
+       .catch((err) => console.log(err));
 }
 
 exports.getBoards = getBoards;

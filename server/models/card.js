@@ -10,7 +10,10 @@ const CardSchema = new Schema({
     type: Date,
     default: null,
   },
-  labels: [{ type: String, }],
+  labels: {
+    type: [ String ],
+    default: [],
+  },
   description: {
     type: String,
     default: null,
@@ -20,14 +23,34 @@ const CardSchema = new Schema({
     ref: "List",
     required: [true, "The list id is required"],
   },
+  boardId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Board",
+    required: [true, "The board id is required"],
+  },
   position: {
     type: Number,
     default: 65000,
   },
+  comments: {
+    type: [ String ],
+    default: [],
+  },
   commentsCount: {
     type: Number,
     default: 0,
-    required: [true, "Comments count required"],
+  },
+  actions: {
+    type: [ Object ],
+    default: [],
+  },
+  archived: {
+    type: Boolean,
+    default: false,
+  },
+  completed: {
+    type: Boolean,
+    default: false,
   },
 }, { timestamps: true });
 

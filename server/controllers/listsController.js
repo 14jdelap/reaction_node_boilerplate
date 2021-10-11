@@ -4,8 +4,17 @@ const HttpError = require("../models/httpError");
 const List = require("../models/list");
 const boardControllers = require("./boardsController");
 
+const getList = (id, next) => {
+  return List.find({ _id: id})
+             .catch((error) => next(new HttpError("The list doesn't exist, please try again with a valid list id", 404)));
+}
+
+const addCardToList = (listId, cardId) => {
+  return List.updateOne({ _id: listId}, { $addToSet: { cards: cardId } })
+             .catch((err) => console.log(err));
+}
+
 const createList = (req, res, next) => {
-  console.log(req)
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
@@ -58,5 +67,7 @@ const updateList = (req, res, next) => {
   }
 }
 
+exports.getList = getList;
 exports.createList = createList;
 exports.updateList = updateList;
+exports.addCardToList = addCardToList;
