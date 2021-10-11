@@ -34,7 +34,7 @@ const List = ({ list }) => {
             <span>...</span>
           </div>
         </div>
-        
+
         <ExistingCards listId={list._id} />
 
         <div className="add-dropdown add-bottom">

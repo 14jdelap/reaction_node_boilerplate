@@ -14,23 +14,27 @@ const addCardToList = (listId, cardId) => {
              .catch((err) => console.log(err));
 }
 
+const sendList = (req, res, next) => {
+  res.send(req.list);
+}
+
 const createList = (req, res, next) => {
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
-    const boardId = req.body.boardId;
 
     const payload = {
       title: req.body.list.title,
-      boardId,
+      boardId: req.body.boardId,
     }
 
     List.create(payload)
       .then((list) => {
         List.find({ _id: list._id }, "title _id createdAt updatedAt position").then(
-          (list) => {
-            boardControllers.addListToBoard(boardId, list[0]._id);
-            res.json({ list })
+          (arrayOflists) => {
+            req.list = arrayOflists[0];
+            req.listId = arrayOflists[0]._id;
+            next();
           }
         );
       })
@@ -71,3 +75,4 @@ exports.getList = getList;
 exports.createList = createList;
 exports.updateList = updateList;
 exports.addCardToList = addCardToList;
+exports.sendList = sendList;

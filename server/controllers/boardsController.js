@@ -42,9 +42,10 @@ const createBoard = (req, res, next) => {
   }
 };
 
-const addListToBoard = (boardId, listId) => {
-  Board.updateOne({ _id: boardId}, { $addToSet: { lists: listId } })
-       .catch((err) => console.log(err));
+const addListToBoard = (req, res, next) => {
+  Board.updateOne({ _id: req.body.boardId}, { $addToSet: { lists: req.listId } })
+       .then(() => next())
+       .catch((err) => next(new HttpError("Object couldn't be updated", 404)));
 }
 
 exports.getBoards = getBoards;

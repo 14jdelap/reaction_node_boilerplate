@@ -5,12 +5,12 @@ export default function lists(state = [], action) {
         const {cards, ...listWithoutCards} = list
         return listWithoutCards
       })
-      
+
       return lists
     }
 
     case "ADD_NEW_LIST_SUCCESS": {
-      return state.concat(action.list.list[0])
+      return state.concat(action.list)
     }
 
     case "UPDATE_LIST_TITLE_SUCCESS": {
