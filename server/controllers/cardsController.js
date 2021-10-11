@@ -17,43 +17,42 @@ const getCard = (req, res, next) => {
   })
 }
 
-const createCard = (payload, next) => {
-  return Card.create(payload)
+const createCard = (req, res, next) => {
+  const payload = {
+    ...req.body.card,
+    listId: req.body.listId,
+    boardId: req.list.boardId
+  };
+  
+  Card.create(payload)
+      .then((card) => {
+        req.card = card
+        next()
+      })
       .catch((err) => {
-        console.log(err)
+        console.log("There is an error here", err)
         next(new HttpError("Creating card failed, please try again", 500))
       });
+};
+
+const sendCard = (req, res) => {
+  const card = req.card;
+  res.json({
+    card,
+  });
 };
 
 const handleCreateCard = (req, res, next) => {
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
-    // Error: sending 2 responses for 1 request
-
-    listsController.getList(req.body.listId, next)
-                   .then((list) => {
-                     // Create card and pass it to the next handler
-                     const payload = {
-                       ...req.body.card,
-                       listId: req.body.listId,
-                       boardId: req.body.boardId
-                      };
-
-                     payload.boardId = list[0].boardId;
-                     return createCard(payload, next);
-                   })
-                   .then((card) => {
-                     // Create card to its list
-                     listsController.addCardToList(card.listId, card._id);
-                     return card;
-                   })
-                   .then((card) => res.json(card));
+    next()
   } else {
-    return next(new HttpError("\nInvalid inputs, please try again\n", 422));
+    next(new HttpError("\nInvalid inputs, please try again\n", 422));
   }
 }
 
 exports.getCard = getCard;
 exports.createCard = createCard;
+exports.sendCard = sendCard;
 exports.handleCreateCard = handleCreateCard;

@@ -4,14 +4,21 @@ const HttpError = require("../models/httpError");
 const List = require("../models/list");
 const boardControllers = require("./boardsController");
 
-const getList = (id, next) => {
-  return List.find({ _id: id})
+const getList = (req, res, next) => {
+  return List.find({ _id: req.body.listId})
+             .then((listArray) => {
+               req.list = listArray[0]
+               next()
+             })
              .catch((error) => next(new HttpError("The list doesn't exist, please try again with a valid list id", 404)));
 }
 
-const addCardToList = (listId, cardId) => {
-  return List.updateOne({ _id: listId}, { $addToSet: { cards: cardId } })
-             .catch((err) => console.log(err));
+const addCardToList = (req, res, next) => {
+  const listId = req.card.listId
+  const cardId = req.card._id
+  List.updateOne({ _id: listId}, { $addToSet: { cards: cardId } })
+      .then(() => next())
+      .catch((error) => next(new HttpError("You weren't able to add the cardId to the array in the list", 404)))
 }
 
 const sendList = (req, res, next) => {

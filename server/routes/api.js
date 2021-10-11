@@ -12,7 +12,10 @@ router.get('/cards/:id', cardsController.getCard);
 
 router.post('/boards', validateBoard, boardsController.createBoard );
 router.post('/lists', validateList, listsController.createList, boardsController.addListToBoard, listsController.sendList);
-router.post('/cards', validateCard, cardsController.handleCreateCard);
+//router.post('/cards', validateCard, cardsController.handleCreateCard);
+
+router.post('/cards', validateCard, cardsController.handleCreateCard, listsController.getList, cardsController.createCard, listsController.addCardToList, cardsController.sendCard );
+
 
 router.put('/lists/:id', validateListUpdate, listsController.updateList );
 
