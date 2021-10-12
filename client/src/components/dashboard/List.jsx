@@ -8,6 +8,8 @@ const List = ({ list }) => {
   const dispatch = useDispatch()
 
   const [listTitle, setListTitle] = useState(list.title)
+  const [showForm, setShowForm] = useState(false)
+  const [newCardTitle, setNewCardTitle] = useState("")
 
   const handleChangeUpdate = (e) => {
     setListTitle(e.target.value)
@@ -19,7 +21,20 @@ const List = ({ list }) => {
     }
   }
 
-  return <div className="list-wrapper">
+  const closeAndResetForm = () => {
+    setShowForm(false)
+    setNewCardTitle("")
+  }
+
+  const handleCreateNewCard = () => {
+    
+
+
+
+    closeAndResetForm()
+  }
+
+  return <div className={"list-wrapper" + (showForm ? " add-dropdown-active" : "")}>
     <div className="list-background">
       <div className="list">
         <a className="more-icon sm-icon" href=""></a>
@@ -37,19 +52,25 @@ const List = ({ list }) => {
 
         <ExistingCards listId={list._id} />
 
-        <div className="add-dropdown add-bottom">
+        <div className={"add-dropdown add-bottom" + (showForm ? " active-card" : "")}>
           <div className="card">
-            <div className="card-info"></div>
-            <textarea name="add-card"></textarea>
-            <div className="members"></div>
+            <div className="card-info">
+            </div>
+            <textarea name="add-card" value={newCardTitle} onChange={(e) => setNewCardTitle(e.target.value)}>
+            </textarea>
+            <div className="members">
+            </div>
           </div>
-          <a className="button">Add</a>
-          <i className="x-icon icon"></i>
+          <a className="button" onClick={closeAndResetForm}>
+            Add
+          </a>
+          <i className="x-icon icon" onClick={closeAndResetForm}>
+          </i>
           <div className="add-options">
             <span>...</span>
           </div>
         </div>
-        <div className="add-card-toggle" data-position="bottom">
+        <div className="add-card-toggle" data-position="bottom" onClick={() => setShowForm(true)}>
           Add a card...
         </div>
       </div>
