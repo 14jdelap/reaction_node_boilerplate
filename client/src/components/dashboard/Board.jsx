@@ -5,7 +5,20 @@ import BoardHeader from "./BoardHeader"
 import ExistingLists from "./ExistingLists"
 
 const Board = (props) => {
-  const boardId = props.match.params.id
+  let boardId
+
+  if (props.match.path === "/cards/:id") {
+    /*
+    const state = useSelector(state => state)
+    console.log(state)
+    const cards = useSelector(state => state.cards)
+    console.log(cards)
+    const renderedCard = cards.find(card => card._id == props.match.params.id)
+    boardId = renderedCard._id*/
+    boardId = "615c817f9ca1eb06519726f4"
+  } else {
+    boardId = props.match.params.id
+  }
   const dispatch = useDispatch()
 
   const boards = useSelector(state => state.boards)

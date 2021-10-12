@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import TopNav from "./shared/TopNav";
 import BoardsDashboardContainer from "./dashboard/BoardsDashboardContainer";
 import Board from "./dashboard/Board"
+import Modal from "./modal/Modal"
 import UISection from "./ui/UISection";
 import AllBoards from "./ui/AllBoards";
 import CardArchived from "./ui/CardArchived";
@@ -21,6 +22,8 @@ const Application = () => {
       <TopNav />
       <Route path="/" exact component={BoardsDashboardContainer} />
       <Route path="/boards/:id" component={Board} />
+      <Route path="/cards/:id" component={Board} />
+      <Route path="/cards/:id" component={Modal} />
       <Route path="/ui" exact component={UISection} />
       <Route path="/ui/allBoards" component={AllBoards} />
       <Route path="/ui/cardArchived" component={CardArchived} />
