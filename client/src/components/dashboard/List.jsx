@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import ExistingCards from "./ExistingCards"
 import { updateListTitle } from "../../actions/ListActions"
+import { createNewCard } from "../../actions/CardActions"
 
 const List = ({ list }) => {
   const dispatch = useDispatch()
@@ -27,11 +28,13 @@ const List = ({ list }) => {
   }
 
   const handleCreateNewCard = () => {
-    
-
-
-
-    closeAndResetForm()
+    // Enviar datos al servidor
+    // Si el servidor se actualiza, actualizar el state de los cards
+    // Create card
+    // Append card a su list
+    const title = newCardTitle;
+    const listId = list._id;
+    dispatch(createNewCard(title, listId, closeAndResetForm));
   }
 
   return <div className={"list-wrapper" + (showForm ? " add-dropdown-active" : "")}>
@@ -61,7 +64,7 @@ const List = ({ list }) => {
             <div className="members">
             </div>
           </div>
-          <a className="button" onClick={closeAndResetForm}>
+          <a className="button" onClick={handleCreateNewCard}>
             Add
           </a>
           <i className="x-icon icon" onClick={closeAndResetForm}>

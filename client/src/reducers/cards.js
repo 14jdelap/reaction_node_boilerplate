@@ -7,6 +7,9 @@ export default function cards(state = [], action) {
       }))
       return cards
     }
+    case "ADD_NEW_CARD_SUCCESS": {
+      return state.concat(action.card);
+    }
     default:
       return state;
   }
