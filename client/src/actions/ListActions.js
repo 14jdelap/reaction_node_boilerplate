@@ -10,7 +10,6 @@ export function createNewList (title, boardId, callback) {
   }
   return function(dispatch) {
     apiClient.createList(newListObj, listResponse => {
-      listResponse.boardId = boardId
       dispatch(createListSuccess(listResponse))
       if (callback) {
         callback()
