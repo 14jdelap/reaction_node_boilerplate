@@ -63,8 +63,32 @@ const handleCreateCard = (req, res, next) => {
   }
 }
 
+const handleUpdateCard = (req, res, next) => {
+  const errors = validationResult(req.body);
+
+  if (errors.isEmpty()) {
+    const payload = { ...req.body.card };
+    req.card = payload
+    next()
+  } else {
+    return next(new HttpError("You need to pass at least one input field", 404));
+  }
+}
+
+const updateCard = (req, res, next) => {
+  const cardId = req.params.id;
+
+  Card.updateOne({ _id: cardId}, req.card)
+      .then(() => {
+        Card.find({ _id: cardId })
+            .then((card) => res.send(card));
+      }).catch(error => res.send(error));
+}
+
 exports.getCard = getCard;
 exports.createCard = createCard;
 exports.sendCard = sendCard;
 exports.handleCreateCard = handleCreateCard;
 exports.addCommentToCard = addCommentToCard;
+exports.handleUpdateCard = handleUpdateCard;
+exports.updateCard = updateCard
