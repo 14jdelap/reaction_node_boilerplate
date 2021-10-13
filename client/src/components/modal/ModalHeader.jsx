@@ -4,8 +4,7 @@ import React from "react";
 const ModalHeader = ({ title, listTitle }) => {
   return <header>
     <i className="card-icon icon .close-modal"></i>
-    <textarea className="list-title" style={{ height: "45px" }}>
-      {title}
+    <textarea className="list-title" style={{ height: "45px" }} value={title} onChange={() => {}}>
     </textarea>
     <p>
       in list <a className="link">{listTitle}</a>

@@ -10,6 +10,9 @@ export default function cards(state = [], action) {
     case "ADD_NEW_CARD_SUCCESS": {
       return state.concat(action.card);
     }
+    case "GET_NEW_CARD_SUCCESS": {
+      return [action.card];
+    }
     default:
       return state;
   }

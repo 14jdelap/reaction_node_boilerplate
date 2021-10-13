@@ -21,8 +21,7 @@ const ModalActivity = ({ actions }) => {
         </small>
         <div className="comment">
           <label>
-            <textarea required="" rows="1">
-              The activities have not been implemented yet.
+            <textarea required="" rows="1" onChange={() => {}} value="The activities have not been implemented yet.">
             </textarea>
             <div>
               <a className="light-button card-icon sm-icon"></a>
@@ -64,8 +63,7 @@ const ModalActivity = ({ actions }) => {
         </small>
         <div className="comment">
           <label>
-            <textarea required="" rows="1">
-              Example of a comment.
+            <textarea required="" rows="1" value="Example of a comment." onChange={() => {}}>
             </textarea>
             <div>
               <a className="light-button card-icon sm-icon"></a>

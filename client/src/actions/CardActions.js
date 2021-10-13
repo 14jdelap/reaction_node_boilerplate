@@ -13,8 +13,6 @@ export function createNewCard (title, listId, callback) {
   // Dispatch from Redux Thunk is in the component
   return function(dispatch) {
     apiClient.createNewCard(payload, response => {
-      console.log(response);
-
       dispatch(createCardSuccess(response));
       if (callback) {
         callback();
@@ -26,3 +24,19 @@ export function createNewCard (title, listId, callback) {
 export function createCardSuccess(response) {
   return { type: "ADD_NEW_CARD_SUCCESS", card: response.card };
 }
+
+export function getCard(cardId, setCard, callback) {
+  return function(dispatch) {
+    apiClient.getCard(cardId, card => {
+      dispatch(getCardSuccess(card));
+      setCard(card)
+      if (callback) {
+        callback();
+      }
+    });
+  }
+}
+
+export function getCardSuccess(card) {
+  return { type: "GET_NEW_CARD_SUCCESS", card, }
+};

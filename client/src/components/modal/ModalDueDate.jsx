@@ -9,7 +9,9 @@ const ModalDueDate = ({ dueDate }) => {
         type="checkbox"
         className="checkbox"
         checked=""
-      />
+        onChange={() => {}}
+        />
+        { /* Need to change input when applicable */}
       {dueDate} <span>{/*TODO: Check if the date is due */}(past due)</span>
     </div>
   </li>
