@@ -11,11 +11,13 @@ const ModalBody = ({ card }) => {
       <li className="details-section">
         <ul className="modal-details-list">
           <ModalLabels labels={card.labels} />
+          { /* How to deal with null due dates? */}
           <ModalDueDate dueDate={card.dueDate} />
         </ul>
         <ModalCardDescription description={card.description}/>
       </li>
       <ModalComments comments={card.comments} />
+      { /* How to deal with no comments? */}
       <ModalActivity actions={card.actions} />
     </ul>
   </section>

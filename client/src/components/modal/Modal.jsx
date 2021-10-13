@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ModalHeader from "./ModalHeader"
 import ModalBody from "./ModalBody"
 import ModalAside from "./ModalAside"
+import { Link } from "react-router-dom";
 import { useSelector, useStore } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getCard } from "../../actions/CardActions";
@@ -26,7 +27,7 @@ const Modal = (props) => {
     let selectedCard = cards.find(card => card._id === cardId);
     if (selectedCard === undefined) {
       dispatch(getCard(cardId, setCard));
-      // COnseguir card
+      // Conseguir card
       // Set state del card con el valor del card del servidor
       // Conseguir card's list del servidor y set el valor de la lista
       // Conseguir card's board del servidor y set el valor de la board
@@ -34,8 +35,6 @@ const Modal = (props) => {
       setCard(selectedCard);
     }
   }, [])
-
-  console.log(card)
 
   if (card === null) {
     return <div id="modal-container"></div>
@@ -45,7 +44,9 @@ const Modal = (props) => {
     <div id="modal-container">
       <div className="screen"></div>
       <div id="modal">
-        <i className="x-icon icon close-modal"></i>
+        <Link to={`/boards/${card.boardId}`}>
+          <i className="x-icon icon close-modal"></i>
+        </Link>
         {/* Pasar valor de titulo de lista! */}
         <ModalHeader title={card.title} listTitle={mockCard.listTitle} />
         <ModalBody card={card}/>
