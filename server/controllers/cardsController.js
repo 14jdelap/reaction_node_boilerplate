@@ -7,9 +7,10 @@ const { validationResult } = require("express-validator");
 
 
 const getCard = (req, res, next) => {
-  const cardId = req.params.id;
-  Card.findById(cardId).then(card => {
-    res.json(card)
+  const cardId = req.params.id || req.body.cardId;
+  Card.findById(cardId).populate({path: "comments"}).then(card => {
+    req.card = card;
+    next()
   })
   .catch((error) => {
     console.log(error)
@@ -23,7 +24,7 @@ const createCard = (req, res, next) => {
     listId: req.body.listId,
     boardId: req.list.boardId
   };
-  
+
   Card.create(payload)
       .then((card) => {
         req.card = card
@@ -35,10 +36,20 @@ const createCard = (req, res, next) => {
       });
 };
 
-const sendCard = (req, res) => {
-  const card = req.card;
+const addCommentToCard = (req, res, next) => {
+  const cardId = req.comment.cardId;
+  const commentId = req.comment._id;
+
+  Card.updateOne({ _id: cardId }, { $addToSet: { comments: commentId } })
+      .then(() => {
+        next()
+      })
+      .catch((error) => next(new HttpError("You didnt add the comment id to the card")));
+}
+
+const sendCard = (req, res, next) => {
   res.json({
-    card,
+    card: req.card,
   });
 };
 
@@ -48,7 +59,7 @@ const handleCreateCard = (req, res, next) => {
   if (errors.isEmpty()) {
     next()
   } else {
-    next(new HttpError("\nInvalid inputs, please try again\n", 422));
+    next(new HttpError("\nEntity isn't processable, please try again\n", 422));
   }
 }
 
@@ -56,3 +67,4 @@ exports.getCard = getCard;
 exports.createCard = createCard;
 exports.sendCard = sendCard;
 exports.handleCreateCard = handleCreateCard;
+exports.addCommentToCard = addCommentToCard;

@@ -32,10 +32,7 @@ const CardSchema = new Schema({
     type: Number,
     default: 65000,
   },
-  comments: {
-    type: [ String ],
-    default: [],
-  },
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   commentsCount: {
     type: Number,
     default: 0,
