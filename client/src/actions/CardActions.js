@@ -40,4 +40,20 @@ export function getCard(cardId, setCard, callback) {
 
 export function getCardSuccess(card) {
   return { type: "GET_NEW_CARD_SUCCESS", card, }
-};
+}
+
+export function updateCard(cardId, dataToUpdate) {
+  const updateObject = {
+    card: dataToUpdate
+  }
+
+  return function (dispatch) {
+    apiClient.updateCard(cardId, updateObject, cardResponse => {
+      dispatch(updateCardSuccess(cardResponse))
+    })
+  }
+}
+
+export function updateCardSuccess(cardResponse) {
+  return { type: "UPDATE_CARD_SUCCESS", card: cardResponse}
+}

@@ -13,6 +13,14 @@ export default function cards(state = [], action) {
     case "GET_NEW_CARD_SUCCESS": {
       return [action.card];
     }
+    case "UPDATE_CARD_SUCCESS": {
+      return state.map(card => {
+        if (card._id == action.card._id) {
+          card = action.card
+        }
+        return card
+      })
+    }
     default:
       return state;
   }

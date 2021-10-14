@@ -48,7 +48,7 @@ const Modal = (props) => {
           <i className="x-icon icon close-modal"></i>
         </Link>
         {/* Pasar valor de titulo de lista! */}
-        <ModalHeader title={card.title} listTitle={mockCard.listTitle} />
+        <ModalHeader listId={card.listId} card={card}/>
         <ModalBody card={card}/>
         <ModalAside />
       </div>
