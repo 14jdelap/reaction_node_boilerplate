@@ -8,7 +8,11 @@ const ExistingCards = ({ listId }) => {
 
 
   return <div id="cards-container" data-id="list-1-cards">
-    {filteredCards.map(card => (<Card key={card._id} card={card} />))}</div>
+    {filteredCards.map(card => {
+      if (!card.archived) {
+        return <Card key={card._id} card={card} />
+      }
+    })}</div>
 }
 
 export default ExistingCards

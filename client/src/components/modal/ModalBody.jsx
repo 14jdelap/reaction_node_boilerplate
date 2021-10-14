@@ -14,7 +14,7 @@ const ModalBody = ({ card }) => {
           { /* How to deal with null due dates? */}
           <ModalDueDate dueDate={card.dueDate} />
         </ul>
-        <ModalCardDescription description={card.description}/>
+        <ModalCardDescription cardId={card._id} description={card.description}/>
       </li>
       <ModalComments comments={card.comments} />
       { /* How to deal with no comments? */}
