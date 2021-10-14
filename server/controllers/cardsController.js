@@ -85,10 +85,23 @@ const updateCard = (req, res, next) => {
       }).catch(error => res.send(error));
 }
 
+const deleteCard = (req, res, next) => {
+  const cardId = req.params.id;
+
+  // Delete card
+  // Delete all comments with that card id
+  // Go to its list and delete the card id in its card array
+
+  Card.deleteOne({ _id: cardId })
+      .then()
+      .catch(error => res.send(error));
+}
+
 exports.getCard = getCard;
 exports.createCard = createCard;
 exports.sendCard = sendCard;
 exports.handleCreateCard = handleCreateCard;
 exports.addCommentToCard = addCommentToCard;
 exports.handleUpdateCard = handleUpdateCard;
-exports.updateCard = updateCard
+exports.updateCard = updateCard;
+exports.deleteCard = deleteCard;

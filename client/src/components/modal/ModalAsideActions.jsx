@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { updateCard } from "../../actions/CardActions"
 
 const ModalAsideActions = () => {
@@ -8,7 +8,6 @@ const ModalAsideActions = () => {
   const cardId = useParams().id
   const cards = useSelector(state => state.cards);
   const card = cards.find(card => card._id === cardId)
-  
 
   const handleArchiveCard = () => {
     const updateObject = {
@@ -17,6 +16,39 @@ const ModalAsideActions = () => {
 
     dispatch(updateCard(cardId, updateObject))
   }
+
+  const handleUnarchiveCard = () => {
+    const updateObject = {
+      archived: false
+    }
+
+    dispatch(updateCard(cardId, updateObject))
+  }
+
+  const handleDeleteCard = () => {
+    // CONFIRM IF CORRECT
+    dispatch(deleteCard(cardId));
+  }
+
+  function archiveElement() {
+    return <li className="archive-button" onClick={handleArchiveCard}>
+              <i className="file-icon sm-icon"></i>Archive
+          </li>
+  }
+
+  function unArchiveElements() {
+    return <>
+      <li className="unarchive-button" onClick={handleUnarchiveCard}>
+        <i className="send-icon sm-icon"></i>
+        Send to board
+      </li>
+      <li className="red-button" onClick={handleDeleteCard}>
+        <i className="minus-icon sm-icon"></i>
+        Delete
+      </li>
+    </>
+  }
+
   return <>
     <h2>Actions</h2>
     <ul>
@@ -31,11 +63,7 @@ const ModalAsideActions = () => {
         <i className="check-icon sm-icon"></i>
       </li>
       <hr />
-      <Link to={`/boards/${card.boardId}`}>
-        <li className="archive-button" onClick={handleArchiveCard}>
-          <i className="file-icon sm-icon"></i>Archive
-        </li>
-      </Link>
+      {card.archived ? unArchiveElements() : archiveElement() }
     </ul>
     <ul className="light-list">
       <li className="not-implemented">Share and more...</li>

@@ -76,11 +76,13 @@ const apiClient = {
 
   updateCard: function(cardId, updateObject, callback) {
     return axios
-      .put(routes.UPDATE_CARD_URL + cardId, updateObject)
+      .patch(routes.UPDATE_CARD_URL + cardId, updateObject)
       .then(unwrapData)
       .then(callback)
       .catch(logError);
   },
+
+  // Delete card
 };
 
 export default apiClient;

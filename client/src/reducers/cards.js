@@ -15,11 +15,15 @@ export default function cards(state = [], action) {
     }
     case "UPDATE_CARD_SUCCESS": {
       return state.map(card => {
-        if (card._id == action.card._id) {
+        if (card._id === action.card._id) {
           card = action.card
         }
         return card
-      })
+      });
+    }
+    case "DELETE_CARD_SUCCESS": {
+      // CONFIRM IF RIGHT
+      return state.filter(card => card._id !== action.cardId);
     }
     default:
       return state;

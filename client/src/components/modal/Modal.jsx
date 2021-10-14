@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ModalHeader from "./ModalHeader"
 import ModalBody from "./ModalBody"
 import ModalAside from "./ModalAside"
@@ -8,28 +8,27 @@ import { getCard } from "../../actions/CardActions";
 
 
 const Modal = (props) => {
+  const cardId = props.match.params.id;
   const dispatch = useDispatch();
-
-  const [ card, setCard ] = useState(null);
   const cards = useSelector(state => state.cards);
+  const card = cards.find(card => card._id === cardId);
 
   useEffect(() => {
-    const cardId = props.match.params.id;
-    let selectedCard = cards.find(card => card._id === cardId);
-    if (selectedCard === undefined) {
-      dispatch(getCard(cardId, setCard));
-      // Conseguir card
-      // Set state del card con el valor del card del servidor
-      // Conseguir card's list del servidor y set el valor de la lista
-      // Conseguir card's board del servidor y set el valor de la board
-    } else {
-      setCard(selectedCard);
-    }
-  }, [])
+    dispatch(getCard(cardId));
+  }, [dispatch])
 
-  if (card === null) {
-    return <div id="modal-container"></div>
+  if (!card) {
+    return null;
   }
+
+  function showArchivedBanner() {
+    if (card.archived) {
+      return <div className="archived-banner">
+              <i className="file-icon icon"></i>
+              This card is archived.
+            </div>
+    }
+  };
 
   return (
     <div id="modal-container">
@@ -38,6 +37,7 @@ const Modal = (props) => {
         <Link to={`/boards/${card.boardId}`}>
           <i className="x-icon icon close-modal"></i>
         </Link>
+        {showArchivedBanner()}
         <ModalHeader listId={card.listId} card={card}/>
         <ModalBody card={card}/>
         <ModalAside />
