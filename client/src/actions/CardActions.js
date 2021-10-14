@@ -27,7 +27,8 @@ export function createCardSuccess(response) {
 
 export function getCard(cardId, setCard, callback) {
   return function(dispatch) {
-    apiClient.getCard(cardId, card => {
+    apiClient.getCard(cardId, response => {
+      const card = response.card
       dispatch(getCardSuccess(card));
       setCard(card)
       if (callback) {
