@@ -8,7 +8,20 @@ export default function comments(state = [], action) {
       }));
       return comm
     }
-
+    case "ADD_NEW_CARD_SUCCESS": {
+      return state.concat(action.card);
+    }
+    case "GET_NEW_CARD_SUCCESS": {
+      return [action.card];
+    }
+    case "UPDATE_CARD_SUCCESS": {
+      return state.map(card => {
+        if (card._id === action.card._id) {
+          card = action.card
+        }
+        return card
+      });
+    }
     case "CREATE_NEW_COMMENT_SUCCESS" : {
       return state.concat(action.comment)
     }
