@@ -9,7 +9,7 @@ import { createNewComment } from "../../actions/CommentActions";
 const ModalComments = () => {
   const dispatch = useDispatch()
   const cardId = useParams().id
-  const [commentContent, setCommentContent] = useState("hello")
+  const [commentContent, setCommentContent] = useState("");
 
   const handleSubmitComment = () => {
     const commentObject = {

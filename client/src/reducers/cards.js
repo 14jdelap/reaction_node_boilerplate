@@ -3,7 +3,8 @@ export default function cards(state = [], action) {
     case "FETCH_BOARD_SUCCESS": {
       const cards = []
       action.board.lists.forEach(list => list.cards.forEach(card => {
-        cards.push(card)
+        const {comments, ...cardWithoutComments} = card;
+        cards.push(cardWithoutComments)
       }))
       return cards
     }
@@ -24,11 +25,6 @@ export default function cards(state = [], action) {
     case "DELETE_CARD_SUCCESS": {
       // CONFIRM IF RIGHT
       return state.filter(card => card._id !== action.cardId);
-    }
-
-    case "CREATE_NEW_COMMENT_SUCCESS" : {
-      console.log(action.comment)
-      return state
     }
     default:
       return state;
