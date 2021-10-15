@@ -82,6 +82,14 @@ const apiClient = {
       .catch(logError);
   },
 
+  createNewComment: function(payload, callback) {
+    return axios
+      .post(routes.NEW_COMMENT_URL, payload)
+      .then(unwrapData)
+      .then(callback)
+      .catch(logError);
+  },
+
   // Delete card
 };
 

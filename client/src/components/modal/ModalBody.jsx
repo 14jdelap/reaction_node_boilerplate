@@ -16,7 +16,7 @@ const ModalBody = ({ card }) => {
         </ul>
         <ModalCardDescription cardId={card._id} description={card.description}/>
       </li>
-      <ModalComments comments={card.comments} />
+      <ModalComments />
       { /* How to deal with no comments? */}
       <ModalActivity actions={card.actions} />
     </ul>

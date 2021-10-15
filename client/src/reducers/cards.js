@@ -25,6 +25,11 @@ export default function cards(state = [], action) {
       // CONFIRM IF RIGHT
       return state.filter(card => card._id !== action.cardId);
     }
+
+    case "CREATE_NEW_COMMENT_SUCCESS" : {
+      console.log(action.comment)
+      return state
+    }
     default:
       return state;
   }
