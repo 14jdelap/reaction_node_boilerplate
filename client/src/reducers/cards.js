@@ -9,17 +9,20 @@ export default function cards(state = [], action) {
       return cards
     }
     case "ADD_NEW_CARD_SUCCESS": {
-      return state.concat(action.card);
+      const {comments, ...cardWithoutComments} = action.card
+      return state.concat(cardWithoutComments);
     }
     case "GET_NEW_CARD_SUCCESS": {
-      return [action.card];
+      const {comments, ...cardWithoutComments} = action.card
+      return [cardWithoutComments];
     }
     case "UPDATE_CARD_SUCCESS": {
       return state.map(card => {
         if (card._id === action.card._id) {
           card = action.card
         }
-        return card
+        const {comments, ...cardWithoutComments} = card
+        return cardWithoutComments
       });
     }
     case "DELETE_CARD_SUCCESS": {

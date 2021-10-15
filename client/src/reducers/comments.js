@@ -1,27 +1,23 @@
 export default function comments(state = [], action) {
   switch (action.type) {
+    /*
     case "FETCH_BOARD_SUCCESS": {
-      const comm = []
+      let comm = []
       action.board.lists.forEach(list => list.cards.forEach(card => {
         const {comments, ...cardWithoutComments} = card;
-        comm.push(comments)
+        comm = comm.concat(comments)
       }));
       return comm
-    }
+    }*/
     case "ADD_NEW_CARD_SUCCESS": {
-      return state.concat(action.card);
+      const {comments, ...cardWithoutComments} = action.card
+      return state.concat(comments);
     }
     case "GET_NEW_CARD_SUCCESS": {
-      return [action.card];
+      const {comments, ...cardWithoutComments} = action.card
+      return comments;
     }
-    case "UPDATE_CARD_SUCCESS": {
-      return state.map(card => {
-        if (card._id === action.card._id) {
-          card = action.card
-        }
-        return card
-      });
-    }
+
     case "CREATE_NEW_COMMENT_SUCCESS" : {
       return state.concat(action.comment)
     }

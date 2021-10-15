@@ -1,5 +1,6 @@
 const Board = require("../models/board");
 const List = require("../models/list");
+const Comments = require("../models/comment")
 const Card = require("../models/card");
 const HttpError = require("../models/httpError");
 const listsController = require("./listsController");
