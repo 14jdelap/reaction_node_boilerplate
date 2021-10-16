@@ -11,8 +11,7 @@ const ModalDueDate = ({ dueDate }) => {
         checked=""
         onChange={() => {}}
         />
-        { /* Need to change input when applicable */ }
-      {dueDate} <span>{/*TODO: Check if the date is due */}(past due)</span>
+      {dueDate} <span>(past due)</span>
     </div>
   </li>
 }

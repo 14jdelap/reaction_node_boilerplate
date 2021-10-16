@@ -5,10 +5,8 @@ import ModalComment from "./ModalComment";
 
 const ModalActivity = ({ actions }) => {
   const cardId = useParams().id;
-  const comments = useSelector(state => state.comments)
-  console.log("comments", comments)
-  const commentsToRender = comments.filter(comment => comment.cardId == cardId)
-  console.log(commentsToRender)
+  const comments = useSelector(state => state.comments);
+  const commentsToRender = comments.filter(comment => comment.cardId == cardId);
 
   return <li className="activity-section">
     <h2 className="activity-icon icon">Activity</h2>

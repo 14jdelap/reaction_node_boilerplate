@@ -25,10 +25,10 @@ const ModalAsideActions = () => {
     dispatch(updateCard(cardId, updateObject))
   }
 
-  const handleDeleteCard = () => {
-    // CONFIRM IF CORRECT
-    dispatch(deleteCard(cardId));
-  }
+  // const handleDeleteCard = () => {
+  //   // CONFIRM IF CORRECT
+  //   dispatch(deleteCard(cardId));
+  // }
 
   function archiveElement() {
     return <li className="archive-button" onClick={handleArchiveCard}>
@@ -42,7 +42,7 @@ const ModalAsideActions = () => {
         <i className="send-icon sm-icon"></i>
         Send to board
       </li>
-      <li className="red-button" onClick={handleDeleteCard}>
+      <li className="red-button">
         <i className="minus-icon sm-icon"></i>
         Delete
       </li>

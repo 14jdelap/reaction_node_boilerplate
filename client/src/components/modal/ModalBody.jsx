@@ -12,7 +12,7 @@ const ModalBody = ({ card }) => {
         <ul className="modal-details-list">
           <ModalLabels labels={card.labels} />
           { /* How to deal with null due dates? */}
-          <ModalDueDate dueDate={card.dueDate} />
+          {!card.dueDate ? "" : <ModalDueDate dueDate={card.dueDate}/> }
         </ul>
         <ModalCardDescription cardId={card._id} description={card.description}/>
       </li>
